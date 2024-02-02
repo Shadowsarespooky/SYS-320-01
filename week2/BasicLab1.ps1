@@ -28,7 +28,30 @@ clear
 #}
 
 # 9 Create a folder called "outfolder" if it does not already exist
-$folderpath = "C:\Users\champuser\SYS-320-Automation-and-scripting\week2\outfolder"
-if ( $folderpath){
-    Write-Host "Folder Already Exists"
-}
+#$folderpath = "C:\Users\champuser\SYS-320-Automation-and-scripting\week2\outfolder"
+#if (Test-Path $folderpath){
+#    Write-Host "Folder Already Exists"
+#}
+#else{
+#    New-Item -ItemType Directory -Path $folderpath
+#    Write-Host "Folder Created"
+#}
+
+# 10 List all the files in your working directory
+# save results to out.csv file in "outfolder" directory 
+#cd C:\Users\champuser\SYS-320-Automation-and-scripting\week2
+#$files = Get-ChildItem
+#$folderpath = "C:\Users\champuser\SYS-320-Automation-and-scripting\week2\outfolder\"
+#$filePath = Join-Path -Path $folderpath "out.csv"
+# List all the files that has the extension ".ps1" and 
+# Save the results to out.csv file
+#$files | Where-object { $_.Extension -eq ".ps1"} | `
+#Export-Csv -Path $filePath
+
+# 11 Without changing the directory, find every .cvs file recursively 
+# and change their extentions to .log
+# Recursively display all the files
+$folderpath = "C:\Users\champuser\SYS-320-Automation-and-scripting\week2"
+$files = Get-ChildItem -Path $folderpath -Recurse
+$files | Rename-Item -NewName { $_.name -replace '.csv', '.log' }
+Get-ChildItem -Path $folderpath -Recurse

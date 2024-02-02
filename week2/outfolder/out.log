@@ -1,0 +1,16 @@
+#TYPE System.IO.FileInfo
+"PSPath","PSParentPath","PSChildName","PSDrive","PSProvider","PSIsContainer","Mode","VersionInfo","BaseName","Target","LinkType","Name","Length","DirectoryName","Directory","IsReadOnly","Exists","FullName","Extension","CreationTime","CreationTimeUtc","LastAccessTime","LastAccessTimeUtc","LastWriteTime","LastWriteTimeUtc","Attributes"
+"Microsoft.PowerShell.Core\FileSystem::C:\Users\champuser\SYS-320-Automation-and-scripting\week2\BasicLab1.ps1","Microsoft.PowerShell.Core\FileSystem::C:\Users\champuser\SYS-320-Automation-and-scripting\week2","BasicLab1.ps1","C","Microsoft.PowerShell.Core\FileSystem","False","-a----","File:             C:\Users\champuser\SYS-320-Automation-and-scripting\week2\BasicLab1.ps1
+InternalName:     
+OriginalFilename: 
+FileVersion:      
+FileDescription:  
+Product:          
+ProductVersion:   
+Debug:            False
+Patched:          False
+PreRelease:       False
+PrivateBuild:     False
+SpecialBuild:     False
+Language:         
+","BasicLab1","System.Collections.Generic.List`1[System.String]",,"BasicLab1.ps1","2217","C:\Users\champuser\SYS-320-Automation-and-scripting\week2","C:\Users\champuser\SYS-320-Automation-and-scripting\week2","False","True","C:\Users\champuser\SYS-320-Automation-and-scripting\week2\BasicLab1.ps1",".ps1","1/26/2024 12:39:34 PM","1/26/2024 5:39:34 PM","2/1/2024 7:21:15 PM","2/2/2024 12:21:15 AM","2/1/2024 7:21:15 PM","2/2/2024 12:21:15 AM","Archive"
