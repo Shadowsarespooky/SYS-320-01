@@ -47,11 +47,11 @@ $loginoutsTable += [pscustomobject]@{"Time" = $loginouts[$i].TimeGenerated; `
 } # End of for loop
 $loginoutsTable #>
 
-<# 4 Turn the script into a function such that it will take one input and return a table of results
+# 4 Turn the script into a function such that it will take one input and return a table of results
 # The input is the number of days for which you obtain the logs
 # Call your function with the parmeter and print the results on the screen
 function getLogEvents($days) {
-$loginouts = Get-EventLog system -Source Microsoft-Windows-winlogon -After (Get-Date).AddDays($days)
+$loginouts = Get-EventLog system -Source Microsoft-Windows-winlogon -After (Get-Date).AddDays(-$days)
 #Write-Host $loginouts
 $loginoutsTable = @() # Empty array to fill customly
 for($i=0; $i -lt $loginouts.count; $i++){
@@ -69,19 +69,34 @@ $loginoutsTable += [pscustomobject]@{"Time" = $loginouts[$i].TimeGenerated; `
                                        "User" = $username;
                         }
 } # End of for loop
-Write-Host "Going back $days days"
+#Write-Host "Going back $days days"
 $loginoutsTable
 } # End of function
-getLogEvents -15 #>
+#getLogEvents 15
 
 # 5 Create another function to obtain computer start and shut-down times
-$startonoff Get-EventLog system | where-object { $_.EventID -ilike "6006"}
+function getStartShutEvents ($days) {
+$startonoff = Get-EventLog -LogName System -After (Get-Date).AddDays(-$days) | `
+where-object { $_.EventID -eq 6005 -or $_.EventID -eq 6006}
 
-$startonoffTable = @()
+$startonoffTable = @() #empty array to fill with custom objects
 
 for ($i=0; $i -lt $startonoff.count; $i++) {
 
+#create event property value
 $event = ""
 if($startonoff[$i].EventID -eq 6006) {$event="ShutDown"}
-if($startonoff[$i].EventID -eq ****) {$event="StartUp"}
+if($startonoff[$i].EventID -eq 6005) {$event="StartUp"}
+
+
+$startonoffTable += [pscustomobject]@{"Time" = $startonoff[$i].TimeGenerated; `
+                                      "Id" = $startonoff[$i].EventID; `
+                                      "Event" = $event; `
+                                      "User" = "System";
+                                      }
+} # End of for loop
+#Write-Host "Going Back $days days"
+$startonoffTable
 }
+# getStartShutEvents 14
+
