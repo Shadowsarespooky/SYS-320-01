@@ -63,7 +63,7 @@ while($operation){
             # TODO: Check the given password with your new function. 
             #              - If false is returned, do not continue and inform the user
             #              - If true is returned, continue with the rest of the function
-            $passwordEn = ConvertTo-SecureString -String $password
+            $passwordEn = $password | ConvertTo-SecureString -AsPlainText -Force
             createAUser $name $passwordEn
             Write-Host "User: $name is created." | Out-String
             }
