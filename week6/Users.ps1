@@ -77,10 +77,10 @@ function enableAUser($name){
 function checkUser($name){
     
     $userToBeChecked = Get-LocalUser | Where-Object { $_.name -ilike $name }
-    if ($userToBeChecked -ne $null) {
+    if ($userToBeChecked -ne $null) { #user does exist
         return $true
     }
-    else {
+    else { #user does not exist
         Write-Host "$userToBeChecked is $null"
         return $false 
     }

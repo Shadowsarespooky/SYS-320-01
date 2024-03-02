@@ -1,6 +1,5 @@
 ﻿. (Join-Path $PSScriptRoot String-Helper.ps1)
 
-
 <# ******************************
      Function Explaination
 ****************************** #>
