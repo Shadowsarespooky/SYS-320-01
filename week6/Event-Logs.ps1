@@ -63,3 +63,20 @@ function getFailedLogins($timeBack){
 
     return $failedloginsTable
 } # End of function getFailedLogins
+
+function atRiskUsers ($days) {
+    #Prompt for days
+    #$days = Read-Host -Prompt "Please enter the number of days for the failed login logs"
+        
+    # get the list of users with failed logins
+    $failedLogins = getFailedLogins $days
+
+    # filter the users with more than 10 failed logins
+    $atRiskUsers = $failedLogins | Group-Object -Property User | Where-Object { $_.Count -gt 10 }
+
+    #Display at-risk users
+    Write-Host "Users with more than 10 failed logins in the last $days days:" | Out-String
+    foreach ($i in $atRiskUsers) {
+        Write-Host "Users: $($i.Name)", "Count: $($i.Count)" | Out-String
+    }
+}

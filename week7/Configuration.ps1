@@ -11,7 +11,7 @@ function readConfiguration () {
     $a = @()
     $a += [pscustomobject]@{ "Days" = $data[0]; `
                              "ExecutionTime" = $data[1]; }
-    Write-Host ($a | Format-Table | Out-String)
+    #Write-Host ($a | Format-Table | Out-String)
 }
 
 function changeConfiguration () {
@@ -71,8 +71,6 @@ function configurationMenu () {
         }
     }
 }
-configurationMenu
-
 
 
 
