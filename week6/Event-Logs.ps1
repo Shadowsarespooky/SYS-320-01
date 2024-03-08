@@ -36,8 +36,10 @@ return $loginoutsTable
      Function Explaination
 ****************************** #>
 function getFailedLogins($timeBack){
+
+  $timeBack = [int]$timeBack
   
-  $failedlogins = Get-EventLog security -After (Get-Date).AddDays("-"+"$timeBack") | Where { $_.InstanceID -eq "4625" }
+  $failedlogins = Get-EventLog security -After (Get-Date).AddDays(-$timeBack) | Where { $_.InstanceID -eq "4625" }
 
   $failedloginsTable = @()
   for($i=0; $i -lt $failedlogins.Count; $i++){
@@ -75,8 +77,9 @@ function atRiskUsers ($days) {
     $atRiskUsers = $failedLogins | Group-Object -Property User | Where-Object { $_.Count -gt 10 }
 
     #Display at-risk users
-    Write-Host "Users with more than 10 failed logins in the last $days days:" | Out-String
-    foreach ($i in $atRiskUsers) {
-        Write-Host "Users: $($i.Name)", "Count: $($i.Count)" | Out-String
-    }
+    #Write-Host "Users with more than 10 failed logins in the last $days days:" | Out-String
+    #foreach ($i in $atRiskUsers) {
+    #    Write-Host "Users: $($i.Name)", "Count: $($i.Count)" | Out-String
+    #}
+    return ($atRiskUsers| Select-Object Name, Count | Out-String)
 }

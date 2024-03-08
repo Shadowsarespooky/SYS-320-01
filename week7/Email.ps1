@@ -13,4 +13,4 @@ function SendAlertEmail($Body) {
     -port 587 -UseSsl -Credential $Credential
 }
 
-SendAlertEmail "Body of email"
+# SendAlertEmail "Body of email"
