@@ -5,7 +5,7 @@
 
 ipPattern="([0-9]{1,3}\.){3}[0-9]{1,3}"
 
-result=$( ip addr | grep -E "$ipPattern" | grep -E -v '127|255' | awk -F '/' 'print $1' )
+result=$( ip addr | grep -E "$ipPattern" | awk '{print $2}' | grep -E -v '127|255' | awk -F '/' '{print $1}' )
 
 # print the ip address
 echo "$result"
