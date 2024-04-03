@@ -11,10 +11,13 @@ function pageCount(){
 count=$(echo "$allLogs" | sort -k 3 | cut -d' ' -f3 | uniq -c )
 }
 
-#function ips(){
-#ipsAccessed=$(echo "$allLogs" | cut -d' ' -f1 )
-#}
+function ips(){
+ipsAccessed=$(echo "$allLogs" | cut -d' ' -f1 )
+}
 
-getAllLogs
-pageCount
-echo "$count"
+function countingCurlAccess(){
+curlCount=$(cat "$file" | cut -d' ' -f1,12 | grep 'curl' | uniq -c )
+}
+
+countingCurlAccess
+echo "$curlCount"
