@@ -1,6 +1,7 @@
 #! /bin/bash
 
-logFile="/var/log/apache2/access.log"
+#run getLogs.bash first to get access.txt
+logFile="access.txt"
 
 function displayAllLogs(){
 	cat "$logFile"
@@ -43,8 +44,24 @@ function histogram(){
 # number and check with a condition whether it is greater than 10
 # the output should be almost identical to histogram
 # only with daily number of visits that are greater than 10
+
 function frequentVisitors(){
-	echo "woot"
+	local visitors=$(cat "$logFile" | cut -d ' ' -f 1 | sort -n | uniq -c )
+	local dates=$(cat "$logFile" | cut -d ' ' -f 4 | tr -d '[' | cut -d':' -f 1 | sort | uniq)
+	declare -a frequentVis
+
+#	echo "$visitors"
+#	echo "$dates"
+	while read -r line; do
+		count=$(echo "$line" | awk '{print $1}')
+		if [[ "$count" -ge 10 ]]; then
+# I was getting two counts for two different days for the same IP address when using the histogram
+# I wanted to count the total of one IP address, and then display the dates for it. 
+			frequentVis+=("$line" "Dates:" "$dates" )
+		fi
+	done <<< "$visitors"
+	echo "Frequent Visitors: "
+	printf '%s\n' "${frequentVis[@]}"
 }
 
 # function: suspiciousVisitors
@@ -53,10 +70,18 @@ function frequentVisitors(){
 # only display the unique count of IP addresses.
 # Hint: there are examples in slides
 function suspiciousVisitors(){
-	echo "yeet"
+	touch ioc.txt
+	echo "etc/passwd" >> ioc.txt
+	echo "/bin/sh" >> ioc.txt
+	echo "/bin/bash" >> ioc.txt
+	echo "\.\./" >> ioc.txt
+	echo "cmd\.exe" >> ioc.txt
+
+	echo "Suspicious Visitors: "
+	cat access.txt | egrep -i -f ioc.txt | cut -d' ' -f 1 | sort -n | uniq -c
 }
 
-# Keep in mind that I have selected long way of doing things to 
+# Keep in mind that I have selected long way of doing things to
 # demonstrate loops, functions, etc. If you can do things simpler,
 # it is welcomed.
 
@@ -100,12 +125,10 @@ do
 
         # Display frequent visitors
 	elif [[ "$userInput" == "5" ]]; then
-		echo "Displaying frequent vistors"
 		frequentVisitors
 
 	# Display suspicious visitors
 	elif [[ "$userInput" == "6" ]]; then
-		echo "Displaying suspicious vistors"
 		suspiciousVisitors
 
 	# Display a message, if an invalid input is given
