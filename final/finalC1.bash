@@ -9,7 +9,7 @@ link="10.0.17.5/IOC.html"
 page=$(curl -sL "$link")
 
 output=$(echo "$page" | xmlstarlet format --html --recover 2>/dev/null | \
-xmlstarlet select --template --match "//html//body//table/tr[position() > 2]" -v "td[1]" -n)
+xmlstarlet select --template --match "//html//body//table/tr[position() > 1]" -v "td[1]" -n)
 #xmlstar.sourceforget.net/doc.UG/xmlstarlet-ug.html
 
 #save them to the IOC.txt file, use touch
