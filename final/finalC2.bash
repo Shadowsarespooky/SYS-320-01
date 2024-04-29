@@ -23,5 +23,5 @@ while read -r logline; do
 done < "$access"
 
 # save to file named report.txt
-echo "Suspicious Activity:" > report.txt
-printf "%s\n" "${repotContent[@]}" | sort -u >> report.txt
+> report.txt
+printf "%s\n" "${reportContent[@]}" | sort -u >> report.txt

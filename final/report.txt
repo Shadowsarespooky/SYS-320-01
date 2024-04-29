@@ -1,2 +1,10 @@
-Suspicious Activity:
 
+10.0.17.5 04/Mar/2024:14:43:50 /index.php?cmd=etc/passwd
+10.0.17.5 04/Mar/2024:14:44:19 /index.php?cmd=cat+etc/passwd
+10.0.17.5 04/Mar/2024:14:44:52 /index.php?cmd=/bing/bash+myscript.bash
+10.0.17.5 04/Mar/2024:14:45:01 /index.php?cmd=/bin/bash+myscript.bash
+10.0.17.5 04/Mar/2024:14:45:19 /index.php?cmd=/bin/sh+simplebackdoor.bash
+10.0.17.5 04/Mar/2024:14:45:31 /index.php?/bin/sh+simplebackdoor.bash
+10.0.17.5 04/Mar/2024:14:46:03 /index.php?a=1+OR+1=1--
+10.0.17.6 04/Mar/2024:14:49:44 /index.html?command=/bin/bash/+reverseshell.bash
+10.0.17.6 04/Mar/2024:14:50:24 /index.html?command=/bin/bash/+midtermcheatdetector.bash
