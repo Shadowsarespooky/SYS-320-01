@@ -1,4 +1,4 @@
-#!/bib/bash
+#!/bin/bash
 
 # List all the ips in the given network prefix
 # /24 only
