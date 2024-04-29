@@ -17,11 +17,11 @@ declare -a reportContent
 while read -r logline; do
 	while read -r phrase; do
 		# output the IP, date/time,and page accessed
-		content=$(echo "$logline" | grep "$phrase" | cut -d ' ' -f1,4,7 | tr -d '[')
+		content=$(echo "$logline" | grep "$phrase" | cut -d ' ' -f1,4,7 | tr -d '[' | sort -u)
 		reportContent+=("$content")
 	done < "$ioc"
 done < "$access"
 
 # save to file named report.txt
 > report.txt
-printf "%s\n" "${reportContent[@]}" | sort -u >> report.txt
+printf '%s\n'"${reportContent[@]}" | grep -v '^$' | sort -u >> report.txt
